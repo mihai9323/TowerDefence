@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.Linq;
 public class Board : MonoBehaviour {
 
 	[SerializeField] private Tile p_groundTile,p_pathTile;
@@ -13,6 +13,7 @@ public class Board : MonoBehaviour {
 	public static Tile startTile;
 	public static Tile endTile;
 	public static Stats stats;
+	public WebCam webCam;
 	public enum Map
 	{
 		ReadFromCamera,
@@ -21,32 +22,32 @@ public class Board : MonoBehaviour {
 		Debug3
 	}
 
-	private bool[,] debugMap1 = new bool[7,5]{
-		{false,false,true,false,false},
-		{false,false,true,false,false},
-		{false,false,true,true,false},
-		{false,false,false,true,false},
-		{false,true,true,true,false},
-		{false,true,false,false,false},
-		{false,true,false,false,false}
+	private bool[,] debugMap1 = new bool[7,6]{
+		{false,false,true,false,false,false},
+		{false,false,true,false,false,false},
+		{false,false,true,true,false,false},
+		{false,false,false,true,false,false},
+		{false,true,true,true,false,false},
+		{false,true,false,false,false,false},
+		{false,true,false,false,false,false}
 	};
-	private bool[,] debugMap2 = new bool[7,5]{
-		{false,false,true,false,false},
-		{false,false,true,false,false},
-		{false,false,true,true,false},
-		{false,false,false,true,false},
-		{false,false,true,true,false},
-		{false,false,true,false,false},
-		{false,false,true,false,false}
+	private bool[,] debugMap2 = new bool[7,6]{
+		{false,false,true,false,false,false},
+		{false,false,true,false,false,false},
+		{false,false,true,true,false,false},
+		{false,false,false,true,false,false},
+		{false,false,true,true,false,false},
+		{false,false,true,false,false,false},
+		{false,false,true,false,false,false}
 	};
-	private bool[,] debugMap3 = new bool[7,5]{
-		{true,false,false,false,false},
-		{true,false,false,true,true},
-		{true,false,true,true,false},
-		{true,false,true,false,false},
-		{true,false,true,false,false},
-		{true,false,true,false,false},
-		{true,true,true,false,false}
+	private bool[,] debugMap3 = new bool[7,6]{
+		{true,false,false,false,false,false},
+		{true,false,false,true,true,false},
+		{true,false,true,true,false,false},
+		{true,false,true,false,false,false},
+		{true,false,true,false,false,false},
+		{true,false,true,false,false,false},
+		{true,true,true,false,false,false}
 
 	};
 
@@ -58,9 +59,44 @@ public class Board : MonoBehaviour {
 		built = false;
 	}
 	private void Start(){
-		ChooseMap ();
-	}
 
+		ChooseMap ();
+		StartCoroutine ("MapCheck");
+	}
+	private IEnumerator MapCheck(){
+		while (true) {
+			yield return new WaitForSeconds(2.0f);
+			GetMapdata();
+		}
+	}
+	private byte[] previousMap;
+	private void GetMapdata(){
+		bool[,] map = new bool[7,6];
+		Coords2D tower1, tower2;
+		tower1 = new Coords2D (-10, -10);
+		tower2 = new Coords2D (-1, -1);
+		byte[] byteData = webCam.GetData ();
+		if (previousMap == null || !Enumerable.SequenceEqual (previousMap, byteData)) {
+			previousMap = byteData;
+			for (int y = 0; y<6; y++) {
+				for (int x = 0; x<7; x++) {
+					byte b = byteData [y * 7 + x];
+					if (b == 1) {
+						map [x, y] = true;
+					} else
+						map [x, y] = false;
+					if (b == 2) {
+						tower2 = new Coords2D (x, y);
+					}
+					if (b == 3) {
+						tower1 = new Coords2D (x, y);
+					}
+				}
+			}
+		}
+		BuildMap (map);
+		if(tower1.x>-1 && tower2.x>-1)PlaceTowers (tower1.x, tower1.y, tower2.x, tower2.y);
+	}
 	public void BuildMap(bool[,] map){
 		string errorMessage;
 		Coords2D startTileCoords, endTileCoords;
@@ -100,15 +136,15 @@ public class Board : MonoBehaviour {
 		prevMap = mapSource;
 		if (mapSource != Map.ReadFromCamera) {
 			switch(mapSource){
-			case Map.Debug1: BuildMap (debugMap1); PlaceTowers (0, 1, 3, 2); break;
-			case Map.Debug2: BuildMap (debugMap2); PlaceTowers (0, 1, 3, 2); break;
-			case Map.Debug3: BuildMap (debugMap3); PlaceTowers (1, 2, 4, 3); break;
+			case Map.Debug1: BuildMap (debugMap1);break;
+			case Map.Debug2: BuildMap (debugMap2); break;
+			case Map.Debug3: BuildMap (debugMap3); break;
 			}
 
 
 			
 		} else {
-			
+			GetMapdata();
 		}
 	}
 	private bool ValidateData(out string message, bool[,] map, out Coords2D start, out Coords2D finish){
@@ -157,7 +193,7 @@ public class Board : MonoBehaviour {
 		if (built) {
 			tower1.transform.position = new Vector3 (x1, 0, y1);
 			tower2.transform.position = new Vector3 (x2, 0, y2);
-
+			Debug.Log(x1+" "+x2);
 
 		} else {
 			Debug.LogWarning("Map not built yet");

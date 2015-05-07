@@ -93,7 +93,17 @@ public class WebCam : MonoBehaviour {
 			Tick();
 		}
 	}
-
+	public byte[] GetData(){
+		byte[] bytes = new byte[squares.Count];
+		int c = 0;
+		DetectColor ();
+		foreach (Square sqr in squares) {
+			Color color = sqr.GetMaxColor(minPixelCount);
+			bytes[c] = (color == Color.red)?(byte)1:(color == Color.green)?(byte)2: (color == Color.blue)?(byte)3:(byte)0;
+			c++;
+		}
+		return bytes;
+	}
 	void Tick ()
 	{
 		if (webCamTexture.didUpdateThisFrame) {

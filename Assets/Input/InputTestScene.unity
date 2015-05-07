@@ -162,8 +162,8 @@ Transform:
 --- !u!1 &1404906279
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabParentObject: {fileID: 192408, guid: 7fd3c6684c384574dbe5d4fbeb0090bf, type: 2}
+  m_PrefabInternal: {fileID: 2033233433}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1404906282}
@@ -181,15 +181,17 @@ GameObject:
 --- !u!33 &1404906280
 MeshFilter:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabParentObject: {fileID: 3392408, guid: 7fd3c6684c384574dbe5d4fbeb0090bf,
+    type: 2}
+  m_PrefabInternal: {fileID: 2033233433}
   m_GameObject: {fileID: 1404906279}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &1404906281
 Renderer:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabParentObject: {fileID: 2392408, guid: 7fd3c6684c384574dbe5d4fbeb0090bf,
+    type: 2}
+  m_PrefabInternal: {fileID: 2033233433}
   m_GameObject: {fileID: 1404906279}
   m_Enabled: 1
   m_CastShadows: 1
@@ -208,8 +210,8 @@ Renderer:
 --- !u!4 &1404906282
 Transform:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabParentObject: {fileID: 492408, guid: 7fd3c6684c384574dbe5d4fbeb0090bf, type: 2}
+  m_PrefabInternal: {fileID: 2033233433}
   m_GameObject: {fileID: 1404906279}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -220,8 +222,9 @@ Transform:
 --- !u!114 &1404906283
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabParentObject: {fileID: 11492408, guid: 7fd3c6684c384574dbe5d4fbeb0090bf,
+    type: 2}
+  m_PrefabInternal: {fileID: 2033233433}
   m_GameObject: {fileID: 1404906279}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -229,31 +232,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   whiteBalance: {r: 1.00393701, g: 1.01190472, b: 1.11842108, a: 1}
-  detectionType: 3
+  detectionType: 9
   redHueThreshold: .0500000007
-  redIThreshold: 1
+  redIThreshold: .200000003
   blueHueThreshold: .0320000015
-  blueIThreshold: .25999999
-  greenHueThreshold: .0970000029
-  greenIThreshold: .579999983
+  blueIThreshold: .289999992
+  greenHueThreshold: .061999999
+  greenIThreshold: .930000007
   noiseReduction: 0
   framesPerSecond: 12
   resolutionMod: 4
   checkChangeFrames: 5
   redPicked:
-    h: .99906069
-    s: .949179649
-    b: .468503952
+    h: .930816352
+    s: .712018192
+    b: .165354341
     a: 1
   greenPicked:
-    h: .0810400248
-    s: .124686673
-    b: .05511811
+    h: .578540564
+    s: .449834913
+    b: .135964915
     a: 1
   bluePicked:
-    h: .664695561
-    s: .401574731
-    b: .0263157897
+    h: .66154021
+    s: .654754698
+    b: .228070185
     a: 1
   cameraName: HD Pro Webcam C920
   lowerLeft:
@@ -262,7 +265,7 @@ MonoBehaviour:
   upperRight:
     x: 587
     y: 406
-  minPixelCount: -1
+  minPixelCount: 4
   squares:
   - min:
       x: 115
@@ -352,7 +355,7 @@ MonoBehaviour:
       x: 305
       y: 341
     redPixels: 0
-    greenPixels: 0
+    greenPixels: 38
     bluePixels: 0
   - min:
       x: 324
@@ -441,7 +444,7 @@ MonoBehaviour:
     max:
       x: 516
       y: 272
-    redPixels: 0
+    redPixels: 73
     greenPixels: 0
     bluePixels: 0
   - min:
@@ -560,7 +563,7 @@ MonoBehaviour:
       y: 136
     redPixels: 0
     greenPixels: 0
-    bluePixels: 0
+    bluePixels: 40
   - min:
       x: 461
       y: 83
@@ -587,7 +590,7 @@ MonoBehaviour:
       y: 73
     redPixels: 0
     greenPixels: 0
-    bluePixels: 0
+    bluePixels: 1
   - min:
       x: 181
       y: 12
@@ -645,8 +648,9 @@ MonoBehaviour:
 --- !u!65 &1404906284
 BoxCollider:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabParentObject: {fileID: 6592408, guid: 7fd3c6684c384574dbe5d4fbeb0090bf,
+    type: 2}
+  m_PrefabInternal: {fileID: 2033233433}
   m_GameObject: {fileID: 1404906279}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -654,3 +658,47 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 6.1232336e-17}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1001 &2033233433
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 492408, guid: 7fd3c6684c384574dbe5d4fbeb0090bf, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 492408, guid: 7fd3c6684c384574dbe5d4fbeb0090bf, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 492408, guid: 7fd3c6684c384574dbe5d4fbeb0090bf, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 492408, guid: 7fd3c6684c384574dbe5d4fbeb0090bf, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 492408, guid: 7fd3c6684c384574dbe5d4fbeb0090bf, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 492408, guid: 7fd3c6684c384574dbe5d4fbeb0090bf, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 492408, guid: 7fd3c6684c384574dbe5d4fbeb0090bf, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 492408, guid: 7fd3c6684c384574dbe5d4fbeb0090bf, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 7fd3c6684c384574dbe5d4fbeb0090bf, type: 2}
+  m_RootGameObject: {fileID: 1404906279}
+  m_IsPrefabParent: 0
+  m_IsExploded: 1
