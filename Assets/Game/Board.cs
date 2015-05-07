@@ -63,7 +63,7 @@ public class Board : MonoBehaviour {
 
 	public void BuildMap(bool[,] map){
 		string errorMessage;
-		TileCoords startTileCoords, endTileCoords;
+		Coords2D startTileCoords, endTileCoords;
 		if (ValidateData (out errorMessage, map, out startTileCoords, out endTileCoords)) {
 			DestroyPreviousMap();
 			xSize = map.GetLength (0);
@@ -111,10 +111,10 @@ public class Board : MonoBehaviour {
 			
 		}
 	}
-	private bool ValidateData(out string message, bool[,] map, out TileCoords start, out TileCoords finish){
+	private bool ValidateData(out string message, bool[,] map, out Coords2D start, out Coords2D finish){
 		bool startFound = false;
 		bool finishFound = false;
-		start = finish = new TileCoords (255, 255);
+		start = finish = new Coords2D (255, 255);
 
 		for (int y = 0; y<map.GetLength(1); y++) {
 			for (int x = 0; x<map.GetLength(0); x++) {
@@ -130,10 +130,10 @@ public class Board : MonoBehaviour {
 					}else if(sum == 1){
 						if(!startFound){
 							startFound = true;
-							start = new TileCoords(x,y);
+							start = new Coords2D(x,y);
 						}else if(!finishFound){
 							finishFound = true;
-							finish = new TileCoords(x,y);
+							finish = new Coords2D(x,y);
 						}else{
 							message = "multiple possible starts or finishes found";
 							return false;
@@ -182,11 +182,16 @@ public class Board : MonoBehaviour {
 
 	}
 }
-
-public class TileCoords{
-	public byte x,y;
-	public TileCoords(int x,int y){
-		this.x = (byte)x;
-		this.y = (byte)y;
+[System.Serializable]
+public class Coords2D{
+	public int x,y;
+	public Coords2D(int x,int y){
+		this.x = x;
+		this.y = y;
+	}
+	public bool Set{
+		get{
+			return x != 0 || y != 0;
+		}
 	}
 }

@@ -228,13 +228,420 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7500a76f25c7bef4c92c974ca63a75c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  whiteBalance: {r: 2.1982758, g: 2.125, b: 2.93103433, a: 1}
-  detectionType: 0
-  colorThreshold: 45
-  noiseReduction: 3
+  whiteBalance: {r: 1.00393701, g: 1.01190472, b: 1.11842108, a: 1}
+  detectionType: 3
+  redHueThreshold: .0500000007
+  redIThreshold: 1
+  blueHueThreshold: .0320000015
+  blueIThreshold: .25999999
+  greenHueThreshold: .0970000029
+  greenIThreshold: .579999983
+  noiseReduction: 0
   framesPerSecond: 12
-  resolutionMod: 5
+  resolutionMod: 4
+  checkChangeFrames: 5
+  redPicked:
+    h: .99906069
+    s: .949179649
+    b: .468503952
+    a: 1
+  greenPicked:
+    h: .0810400248
+    s: .124686673
+    b: .05511811
+    a: 1
+  bluePicked:
+    h: .664695561
+    s: .401574731
+    b: .0263157897
+    a: 1
   cameraName: HD Pro Webcam C920
+  lowerLeft:
+    x: 109
+    y: 12
+  upperRight:
+    x: 587
+    y: 406
+  minPixelCount: -1
+  squares:
+  - min:
+      x: 115
+      y: 364
+    max:
+      x: 167
+      y: 406
+    redPixels: 0
+    greenPixels: 0
+    bluePixels: 0
+  - min:
+      x: 183
+      y: 362
+    max:
+      x: 234
+      y: 406
+    redPixels: 0
+    greenPixels: 0
+    bluePixels: 0
+  - min:
+      x: 253
+      y: 358
+    max:
+      x: 307
+      y: 406
+    redPixels: 0
+    greenPixels: 0
+    bluePixels: 0
+  - min:
+      x: 324
+      y: 359
+    max:
+      x: 378
+      y: 406
+    redPixels: 0
+    greenPixels: 0
+    bluePixels: 0
+  - min:
+      x: 395
+      y: 357
+    max:
+      x: 446
+      y: 405
+    redPixels: 0
+    greenPixels: 0
+    bluePixels: 0
+  - min:
+      x: 464
+      y: 355
+    max:
+      x: 517
+      y: 408
+    redPixels: 0
+    greenPixels: 0
+    bluePixels: 0
+  - min:
+      x: 534
+      y: 356
+    max:
+      x: 587
+      y: 408
+    redPixels: 0
+    greenPixels: 0
+    bluePixels: 0
+  - min:
+      x: 117
+      y: 296
+    max:
+      x: 166
+      y: 347
+    redPixels: 0
+    greenPixels: 0
+    bluePixels: 0
+  - min:
+      x: 184
+      y: 296
+    max:
+      x: 232
+      y: 346
+    redPixels: 0
+    greenPixels: 0
+    bluePixels: 0
+  - min:
+      x: 250
+      y: 293
+    max:
+      x: 305
+      y: 341
+    redPixels: 0
+    greenPixels: 0
+    bluePixels: 0
+  - min:
+      x: 324
+      y: 291
+    max:
+      x: 380
+      y: 343
+    redPixels: 0
+    greenPixels: 0
+    bluePixels: 0
+  - min:
+      x: 397
+      y: 289
+    max:
+      x: 445
+      y: 340
+    redPixels: 0
+    greenPixels: 0
+    bluePixels: 0
+  - min:
+      x: 462
+      y: 287
+    max:
+      x: 515
+      y: 339
+    redPixels: 0
+    greenPixels: 0
+    bluePixels: 0
+  - min:
+      x: 535
+      y: 285
+    max:
+      x: 586
+      y: 339
+    redPixels: 0
+    greenPixels: 0
+    bluePixels: 0
+  - min:
+      x: 116
+      y: 227
+    max:
+      x: 167
+      y: 280
+    redPixels: 0
+    greenPixels: 0
+    bluePixels: 0
+  - min:
+      x: 186
+      y: 228
+    max:
+      x: 235
+      y: 278
+    redPixels: 0
+    greenPixels: 0
+    bluePixels: 0
+  - min:
+      x: 252
+      y: 229
+    max:
+      x: 306
+      y: 276
+    redPixels: 0
+    greenPixels: 0
+    bluePixels: 0
+  - min:
+      x: 321
+      y: 224
+    max:
+      x: 380
+      y: 275
+    redPixels: 0
+    greenPixels: 0
+    bluePixels: 0
+  - min:
+      x: 397
+      y: 224
+    max:
+      x: 446
+      y: 275
+    redPixels: 0
+    greenPixels: 0
+    bluePixels: 0
+  - min:
+      x: 460
+      y: 223
+    max:
+      x: 516
+      y: 272
+    redPixels: 0
+    greenPixels: 0
+    bluePixels: 0
+  - min:
+      x: 533
+      y: 220
+    max:
+      x: 581
+      y: 267
+    redPixels: 0
+    greenPixels: 0
+    bluePixels: 0
+  - min:
+      x: 112
+      y: 158
+    max:
+      x: 169
+      y: 211
+    redPixels: 0
+    greenPixels: 0
+    bluePixels: 0
+  - min:
+      x: 181
+      y: 158
+    max:
+      x: 236
+      y: 211
+    redPixels: 0
+    greenPixels: 0
+    bluePixels: 0
+  - min:
+      x: 254
+      y: 154
+    max:
+      x: 307
+      y: 210
+    redPixels: 0
+    greenPixels: 0
+    bluePixels: 0
+  - min:
+      x: 320
+      y: 157
+    max:
+      x: 377
+      y: 207
+    redPixels: 0
+    greenPixels: 0
+    bluePixels: 0
+  - min:
+      x: 393
+      y: 156
+    max:
+      x: 443
+      y: 207
+    redPixels: 0
+    greenPixels: 0
+    bluePixels: 0
+  - min:
+      x: 461
+      y: 153
+    max:
+      x: 515
+      y: 203
+    redPixels: 0
+    greenPixels: 0
+    bluePixels: 0
+  - min:
+      x: 531
+      y: 150
+    max:
+      x: 583
+      y: 203
+    redPixels: 0
+    greenPixels: 0
+    bluePixels: 0
+  - min:
+      x: 113
+      y: 87
+    max:
+      x: 165
+      y: 140
+    redPixels: 0
+    greenPixels: 0
+    bluePixels: 0
+  - min:
+      x: 181
+      y: 88
+    max:
+      x: 233
+      y: 143
+    redPixels: 0
+    greenPixels: 0
+    bluePixels: 0
+  - min:
+      x: 255
+      y: 86
+    max:
+      x: 305
+      y: 142
+    redPixels: 0
+    greenPixels: 0
+    bluePixels: 0
+  - min:
+      x: 322
+      y: 88
+    max:
+      x: 373
+      y: 141
+    redPixels: 0
+    greenPixels: 0
+    bluePixels: 0
+  - min:
+      x: 395
+      y: 85
+    max:
+      x: 447
+      y: 136
+    redPixels: 0
+    greenPixels: 0
+    bluePixels: 0
+  - min:
+      x: 461
+      y: 83
+    max:
+      x: 517
+      y: 134
+    redPixels: 0
+    greenPixels: 0
+    bluePixels: 0
+  - min:
+      x: 531
+      y: 81
+    max:
+      x: 581
+      y: 133
+    redPixels: 0
+    greenPixels: 0
+    bluePixels: 0
+  - min:
+      x: 114
+      y: 11
+    max:
+      x: 166
+      y: 73
+    redPixels: 0
+    greenPixels: 0
+    bluePixels: 0
+  - min:
+      x: 181
+      y: 12
+    max:
+      x: 234
+      y: 71
+    redPixels: 0
+    greenPixels: 0
+    bluePixels: 0
+  - min:
+      x: 254
+      y: 13
+    max:
+      x: 308
+      y: 72
+    redPixels: 0
+    greenPixels: 0
+    bluePixels: 0
+  - min:
+      x: 322
+      y: 12
+    max:
+      x: 373
+      y: 70
+    redPixels: 0
+    greenPixels: 0
+    bluePixels: 0
+  - min:
+      x: 395
+      y: 12
+    max:
+      x: 443
+      y: 71
+    redPixels: 0
+    greenPixels: 0
+    bluePixels: 0
+  - min:
+      x: 456
+      y: 13
+    max:
+      x: 510
+      y: 67
+    redPixels: 0
+    greenPixels: 0
+    bluePixels: 0
+  - min:
+      x: 528
+      y: 12
+    max:
+      x: 580
+      y: 67
+    redPixels: 0
+    greenPixels: 0
+    bluePixels: 0
 --- !u!65 &1404906284
 BoxCollider:
   m_ObjectHideFlags: 0
