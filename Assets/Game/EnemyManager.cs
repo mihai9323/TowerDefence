@@ -8,7 +8,7 @@ public class EnemyManager : MonoBehaviour {
 	public event MapChangedEventHandler MapChangedEvent;
 	public event StopAllEventHandler StopAllEvent;
 	[SerializeField] float waveTime = 5.0f;
-	[SerializeField] int countPerWave = 3;
+	int countPerWave = 3;
 	[SerializeField] Enemy enemy_prefab;
 	private int waveCount;
 
@@ -22,16 +22,23 @@ public class EnemyManager : MonoBehaviour {
 	}
 	private IEnumerator SpawnMonsters(){
 		while (true) {
-			if(Board.built){
-				for(int i = 0; i<countPerWave; i++){
-					AddMonster();
-					yield return new WaitForSeconds(5f/Mathf.Max(waveCount,1));
+			WebAPI.GetWave(delegate(bool newWave) {
+				if(newWave){
+					StartCoroutine(AddMonsters(countPerWave));
+					waveCount++;
 				}
-				yield return new WaitForSeconds(waveTime);
-				waveCount++;
-			}else yield return null;
 
+			});
+			yield return new WaitForSeconds(1.0f);
+				
 		}
+	}
+	private IEnumerator AddMonsters(int number){
+		for(int i = 0; i<number; i++){
+			AddMonster();
+			yield return new WaitForSeconds(10f/Mathf.Max(waveCount,1));
+		}
+		yield return new WaitForSeconds(waveTime);
 	}
 	private void AddMonster(){
 		Enemy enemy = Instantiate (enemy_prefab) as Enemy;

@@ -29,12 +29,14 @@ public class Enemy : MonoBehaviour {
 	public void Configure(EnemyManager enemyManager, float health,float speed){
 		myManager = enemyManager;
 		myManager.StopAllEvent += DestroyObject;
+		myManager.MapChangedEvent += CalculatePath;
 		this.speed = speed;
 		this.health = health;
 	}
 	private void OnDestroy(){
 
 		myManager.StopAllEvent -= DestroyObject;
+		myManager.MapChangedEvent -= CalculatePath;
 	}
 	public void CalculatePath(Tile finalTile){
 

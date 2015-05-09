@@ -63,19 +63,24 @@ public class Board : MonoBehaviour {
 		ChooseMap ();
 		StartCoroutine ("MapCheck");
 	}
+	public static void NewWave(){
+		Debug.Log ("New wave");
+	}
 	private IEnumerator MapCheck(){
 		while (true) {
 			yield return new WaitForSeconds(2.0f);
-			GetMapdata();
+			WebAPI.GetMap(delegate(byte[] map) {
+				GetMapdata(map);
+			});
 		}
 	}
 	private byte[] previousMap;
-	private void GetMapdata(){
+	private void GetMapdata(byte[] mp){
 		bool[,] map = new bool[7,6];
 		Coords2D tower1, tower2;
-		tower1 = new Coords2D (-10, -10);
-		tower2 = new Coords2D (-1, -1);
-		byte[] byteData = webCam.GetData ();
+		tower1 = new Coords2D (-100, -100);
+		tower2 = new Coords2D (-100, -100);
+		byte[] byteData = mp;//webCam.GetData ();
 		if (previousMap == null || !Enumerable.SequenceEqual (previousMap, byteData)) {
 			previousMap = byteData;
 			for (int y = 0; y<6; y++) {
@@ -94,14 +99,14 @@ public class Board : MonoBehaviour {
 				}
 			}
 		}
-		BuildMap (map);
-		if(tower1.x>-1 && tower2.x>-1)PlaceTowers (tower1.x, tower1.y, tower2.x, tower2.y);
+
+		if(BuildMap (map))PlaceTowers (tower1.x, tower1.y, tower2.x, tower2.y);
 	}
-	public void BuildMap(bool[,] map){
+	public bool BuildMap(bool[,] map){
 		string errorMessage;
 		Coords2D startTileCoords, endTileCoords;
 		if (ValidateData (out errorMessage, map, out startTileCoords, out endTileCoords)) {
-			DestroyPreviousMap();
+
 			xSize = map.GetLength (0);
 			ySize = map.GetLength (1);
 			GameBoard = new Tile[xSize, ySize];
@@ -122,9 +127,12 @@ public class Board : MonoBehaviour {
 				}
 			}
 			built = true;
+
 			enemyManager.MapChanged();
+			return true;
 		} else {
 			Debug.LogWarning(errorMessage);
+			return false;
 		}
 	}
 	private void Update(){
@@ -143,9 +151,7 @@ public class Board : MonoBehaviour {
 
 
 			
-		} else {
-			GetMapdata();
-		}
+		} 
 	}
 	private bool ValidateData(out string message, bool[,] map, out Coords2D start, out Coords2D finish){
 		bool startFound = false;
@@ -176,7 +182,7 @@ public class Board : MonoBehaviour {
 						}
 					}else if(sum == 3 || sum == 4){
 						message = "intersection found";
-						return false;
+					//	return true;
 					}
 				}
 			}

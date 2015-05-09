@@ -25,6 +25,7 @@ public class WebCam : MonoBehaviour {
 		Normalized,
 		Hue
 	}
+	public bool submitData;
 	public DetectionType detectionType;
 	private static WebCamTexture webCamTexture;
 	[Range(0,.15f)]
@@ -85,21 +86,83 @@ public class WebCam : MonoBehaviour {
 
 		Tick ();
 		StartCoroutine (Refresh ());
+		StartCoroutine (UpdateBackend ());
 	}
 
 	private IEnumerator Refresh(){
 		while(true){
 			yield return new WaitForSeconds(1f/framesPerSecond);
 			Tick();
+
 		}
 	}
-	public byte[] GetData(){
-		byte[] bytes = new byte[squares.Count];
+	private IEnumerator UpdateBackend(){
+		while (true) {
+			yield return new WaitForSeconds(2f);
+			if(submitData){
+				int[] map = GetData ();
+				if(ValidateData(map)){
+					WebAPI.SendMap(GetData());
+					ArduinoInterface.SendData(ArduinoInterface.SendCode.Yellow);
+				}else{
+					Debug.Log("map not valid");
+					ArduinoInterface.SendData(ArduinoInterface.SendCode.Red);
+				}
+
+
+			}
+		}
+	}
+	private bool ValidateData(int[] map){
+		bool startFound = false;
+		bool finishFound = false;
+		int greenTowers=0, blueTowers=0;
+		for (int y = 0; y<6; y++) {
+			for (int x = 0; x<7; x++) {
+				if(map[pos1D(x,y,7)] == 2) greenTowers++;
+				if(map[pos1D(x,y,7)] == 3) blueTowers++;
+				if(greenTowers>1 || blueTowers>1) return false;
+				if (map [pos1D(x,y,7)]==1) {
+					int sum = 0;
+					if(x>0 && map[pos1D(x-1,y,7)]==1) sum++; 
+					if(x<7-1 && map[pos1D(x+1,y,7)]==1) sum++;
+					if(y>0 && map[pos1D(x,y-1,7)]==1) sum++;
+					if(y<6-1 && map[pos1D (x,y+1,7)]==1) sum++;
+					if(sum == 0){
+					
+						return false;
+					}else if(sum == 1){
+						if(!startFound){
+							startFound = true;
+
+						}else if(!finishFound){
+							finishFound = true;
+
+						}else{
+						
+							return false;
+						}
+					}else if(sum == 3 || sum == 4){
+					
+
+					}
+				}
+			}
+		}
+		if (!startFound || !finishFound) {
+		
+			return false;
+		}
+
+		return true;
+	}
+	public int[] GetData(){
+		int[] bytes = new int[squares.Count];
 		int c = 0;
 		DetectColor ();
 		foreach (Square sqr in squares) {
 			Color color = sqr.GetMaxColor(minPixelCount);
-			bytes[c] = (color == Color.red)?(byte)1:(color == Color.green)?(byte)2: (color == Color.blue)?(byte)3:(byte)0;
+			bytes[c] = (color == Color.red)?1:(color == Color.green)?2: (color == Color.blue)?3:0;
 			c++;
 		}
 		return bytes;
@@ -153,7 +216,7 @@ public class WebCam : MonoBehaviour {
 				newPixels = checkPixels (newPixels, image);
 			}
 		}
-		if (minPixelCount > -1) {
+		if (minPixelCount > -1 && detectionType == DetectionType.Hue) {
 			for (int y = 0; y<webCamTexture.height/resolutionMod; y++) {
 				for (int x = 0; x<webCamTexture.width/resolutionMod; x++) {
 					AddPixelToCounter(newPixels[pos1D(x,y,webCamTexture.width/resolutionMod)],x*resolutionMod,y*resolutionMod);
