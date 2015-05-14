@@ -188,7 +188,7 @@ public class WebCam : MonoBehaviour {
 		ResetCounters ();
 		for (int y = 0; y< webCamTexture.height/resolutionMod; y++) {
 			for(int x= 0; x<webCamTexture.width/resolutionMod; x++){
-				if(x*resolutionMod<lowerLeft.x || x*resolutionMod>upperRight.x || y*resolutionMod<lowerLeft.y || y*resolutionMod>upperRight.y) pixels[pos1D (x*resolutionMod,y*resolutionMod,webCamTexture.width)] = Color.black;
+				if(x*resolutionMod<lowerLeft.x || x*resolutionMod>upperRight.x || y*resolutionMod<lowerLeft.y || y*resolutionMod>upperRight.y) pixels[pos1D (x*resolutionMod,y*resolutionMod,webCamTexture.width)] = Color.white;
 
 				Color pixel = pixels[pos1D(x*resolutionMod,y*resolutionMod,webCamTexture.width)];
 				Color adjustedColor = ApplyColorBalance(pixel);
@@ -224,7 +224,7 @@ public class WebCam : MonoBehaviour {
 			}
 			for (int y = 0; y<webCamTexture.height/resolutionMod; y++) {
 				for (int x = 0; x<webCamTexture.width/resolutionMod; x++) {
-					newPixels [pos1D (x, y, webCamTexture.width / resolutionMod)] = Color.yellow;
+					newPixels [pos1D (x, y, webCamTexture.width / resolutionMod)] = Color.white;
 					foreach (Square sqr in squares) {
 						if (sqr.ContainsPoint (x*resolutionMod, y*resolutionMod)) {
 							newPixels [pos1D (x, y, webCamTexture.width / resolutionMod)] = sqr.GetMaxColor (minPixelCount);
@@ -245,7 +245,7 @@ public class WebCam : MonoBehaviour {
 		Color[] result = new Color[image1.Length];
 		for (int i = 0; i<image1.Length; i++) {
 			if(image1[i] == image2[i]) result[i] = image1[i];
-			else result[i] = Color.black;
+			else result[i] = Color.white;
 		}
 		return result;
 	}
@@ -266,7 +266,7 @@ public class WebCam : MonoBehaviour {
 		HSBColor hsbColor = new HSBColor (pixel);
 		if (hsbColor.h == 0) {
 			if (hsbColor.b < .3f)
-				return Color.black;
+				return Color.white;
 			else if (hsbColor.b < .6f)
 				return Color.gray;
 			else
@@ -295,13 +295,13 @@ public class WebCam : MonoBehaviour {
 	private Color[] Erosion(Color[] pixels,int w, int h, int kSize){
 		Color[] resultPixels = new Color[pixels.Length];
 		for (int i = 0; i<resultPixels.Length; i++) {
-			resultPixels[i] = Color.black;
+			resultPixels[i] = Color.white;
 		}
 		int desiredResult = (kSize) * (kSize);
 
 			for (int y = kSize/2; y<h-kSize/2; y++) {
 				for (int x = kSize/2; x<w-kSize/2; x++) {
-					if (pixels [pos1D (x, y, w)] != Color.black && pixels [pos1D (x, y, w)] != Color.white) {
+					if (pixels [pos1D (x, y, w)] != Color.white && pixels [pos1D (x, y, w)] != Color.white) {
 					int Rsum = 0;
 					int Gsum = 0;
 					int Bsum = 0;
@@ -321,7 +321,7 @@ public class WebCam : MonoBehaviour {
 						if(ky==1000) break;
 					}
 					if (Rsum < desiredResult - 1 && Gsum < desiredResult - 1 && Bsum < desiredResult - 1) {
-						resultPixels [pos1D (x, y, w)] = Color.black;
+						resultPixels [pos1D (x, y, w)] = Color.white;
 					} else
 						resultPixels [pos1D (x, y, w)] = pixels [pos1D (x, y, w)];
 				}
@@ -332,12 +332,12 @@ public class WebCam : MonoBehaviour {
 	private Color[] Dilation(Color[] pixels, int w, int h, int kSize){
 		Color[] resultPixels = new Color[pixels.Length];
 		for (int i = 0; i<resultPixels.Length; i++) {
-			resultPixels[i] = Color.black;
+			resultPixels[i] = Color.white;
 		}
 		int desiredResult = (kSize) * (kSize);
 		for (int y = kSize/2; y<h-kSize/2; y++) {
 			for(int x = kSize/2; x<w-kSize/2; x++){
-				if (pixels [pos1D (x, y, w)] != Color.black && pixels [pos1D (x, y, w)] != Color.white) {
+				if (pixels [pos1D (x, y, w)] != Color.white && pixels [pos1D (x, y, w)] != Color.white) {
 				int Rsum = 0;
 				int Gsum = 0;
 				int Bsum = 0;
@@ -349,7 +349,7 @@ public class WebCam : MonoBehaviour {
 					}
 				}
 				if(Rsum < 1 && Gsum < 1 && Bsum < 1){
-					resultPixels[pos1D(x,y,w)] = Color.black;
+					resultPixels[pos1D(x,y,w)] = Color.white;
 				}else{
 					int max= Mathf.Max(new int[3]{Rsum,Gsum,Bsum});
 					if(max == Rsum){

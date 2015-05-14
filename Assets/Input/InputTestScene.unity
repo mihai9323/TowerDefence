@@ -183,6 +183,7 @@ GameObject:
   - 33: {fileID: 1404906280}
   - 114: {fileID: 1404906283}
   - 65: {fileID: 1404906284}
+  - 114: {fileID: 1404906285}
   m_Layer: 0
   m_Name: WebcamInput
   m_TagString: Untagged
@@ -671,6 +672,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 6.1232336e-17}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1404906285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1404906279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e33348aa1e8ae704292a00d5936b1514, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2033233433
 Prefab:
   m_ObjectHideFlags: 0

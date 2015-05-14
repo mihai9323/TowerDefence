@@ -106,7 +106,7 @@ public class Board : MonoBehaviour {
 		string errorMessage;
 		Coords2D startTileCoords, endTileCoords;
 		if (ValidateData (out errorMessage, map, out startTileCoords, out endTileCoords)) {
-
+			DestroyPreviousMap();
 			xSize = map.GetLength (0);
 			ySize = map.GetLength (1);
 			GameBoard = new Tile[xSize, ySize];
@@ -129,6 +129,7 @@ public class Board : MonoBehaviour {
 			built = true;
 
 			enemyManager.MapChanged();
+
 			return true;
 		} else {
 			Debug.LogWarning(errorMessage);

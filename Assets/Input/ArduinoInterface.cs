@@ -21,6 +21,7 @@ public class ArduinoInterface : MonoBehaviour {
 			//Read incoming data
 			strIn = sp.ReadLine ();
 			if (strIn == "1") {
+				Debug.Log(strIn);
 				WebAPI.SendWave();
 			}
 		
