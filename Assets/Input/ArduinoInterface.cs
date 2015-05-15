@@ -12,9 +12,12 @@ public class ArduinoInterface : MonoBehaviour {
 		Red
 	}
 	//Setup parameters to connect to Arduino
-	public static SerialPort sp = new SerialPort("COM9", 9600);
+	public static SerialPort sp;
 	public static string strIn;        
-	
+	public string COM = "COM9";
+	void Awake(){
+		sp = new SerialPort(COM, 9600);
+	}
 	void Update()
 	{
 		if (sp.IsOpen ) {
